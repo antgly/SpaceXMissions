@@ -16,6 +16,10 @@
 		A7A7E73D2814B1EB00F0E2A3 /* RootNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E73C2814B1EB00F0E2A3 /* RootNavigationViewController.swift */; };
 		A7A7E7412814B27E00F0E2A3 /* RouteFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7402814B27E00F0E2A3 /* RouteFactory.swift */; };
 		A7A7E7432814B47000F0E2A3 /* MissionsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7422814B47000F0E2A3 /* MissionsListTableViewController.swift */; };
+		A7A7E7452814B88B00F0E2A3 /* MissionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7442814B88B00F0E2A3 /* MissionsListViewModel.swift */; };
+		A7A7E7482814B9CB00F0E2A3 /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7472814B9CB00F0E2A3 /* Mission.swift */; };
+		A7A7E74B2814BE5300F0E2A3 /* MissionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */; };
+		A7A7E74E2814C09500F0E2A3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74D2814C09500F0E2A3 /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		A7A7E73C2814B1EB00F0E2A3 /* RootNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationViewController.swift; sourceTree = "<group>"; };
 		A7A7E7402814B27E00F0E2A3 /* RouteFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFactory.swift; sourceTree = "<group>"; };
 		A7A7E7422814B47000F0E2A3 /* MissionsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsListTableViewController.swift; sourceTree = "<group>"; };
+		A7A7E7442814B88B00F0E2A3 /* MissionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsListViewModel.swift; sourceTree = "<group>"; };
+		A7A7E7472814B9CB00F0E2A3 /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListService.swift; sourceTree = "<group>"; };
+		A7A7E74D2814C09500F0E2A3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				A7A7E7382814B08900F0E2A3 /* UI */,
-				A7A7E7372814B08300F0E2A3 /* Model */,
 				A7A7E7362814B06F00F0E2A3 /* ViewModel */,
 			);
 			path = MissionsList;
@@ -140,6 +147,7 @@
 		A7A7E7352814B04B00F0E2A3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A7A7E74D2814C09500F0E2A3 /* Response.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -147,6 +155,8 @@
 		A7A7E7362814B06F00F0E2A3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A7A7E7372814B08300F0E2A3 /* Model */,
+				A7A7E7442814B88B00F0E2A3 /* MissionsListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -154,6 +164,8 @@
 		A7A7E7372814B08300F0E2A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A7A7E7492814BE3C00F0E2A3 /* Services */,
+				A7A7E7462814B92F00F0E2A3 /* Entities */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,8 +181,8 @@
 		A7A7E73B2814B19100F0E2A3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				A7A7E7402814B27E00F0E2A3 /* RouteFactory.swift */,
 				A7A7E73E2814B20100F0E2A3 /* Root */,
+				A7A7E7402814B27E00F0E2A3 /* RouteFactory.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -189,6 +201,22 @@
 				A7A7E73C2814B1EB00F0E2A3 /* RootNavigationViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		A7A7E7462814B92F00F0E2A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A7A7E7472814B9CB00F0E2A3 /* Mission.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A7A7E7492814BE3C00F0E2A3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +349,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A7E74E2814C09500F0E2A3 /* Response.swift in Sources */,
+				A7A7E7482814B9CB00F0E2A3 /* Mission.swift in Sources */,
+				A7A7E7452814B88B00F0E2A3 /* MissionsListViewModel.swift in Sources */,
+				A7A7E74B2814BE5300F0E2A3 /* MissionListService.swift in Sources */,
 				A7A7E7412814B27E00F0E2A3 /* RouteFactory.swift in Sources */,
 				A7A7E73D2814B1EB00F0E2A3 /* RootNavigationViewController.swift in Sources */,
 				A7A7E7052814AE1100F0E2A3 /* AppDelegate.swift in Sources */,
