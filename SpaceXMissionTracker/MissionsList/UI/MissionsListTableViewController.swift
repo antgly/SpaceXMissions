@@ -31,6 +31,15 @@ class MissionsListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    private func configureCell(_ cell: UITableViewCell, mission: Mission) {
+        cell.textLabel?.text =
+        """
+        Launch Year: \(mission.launchYear)
+        Rocket Name: \(mission.rocketName)
+        Mission Name: \(mission.name)
+        """
+    }
 
     // MARK: - Table view data source
 
@@ -43,9 +52,12 @@ class MissionsListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row > missions.count - 1 {
+            fatalError("Cannot create cell with mission data being inconsistent")
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        let row = indexPath.row
-        cell.textLabel?.text = "Date: \(dateFormatter.string(from: missions[row].date))"
+        cell.textLabel?.numberOfLines = 0
+        configureCell(cell, mission: missions[indexPath.row])
         return cell
     }
 }

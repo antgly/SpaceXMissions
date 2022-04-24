@@ -14,12 +14,26 @@ protocol MissionsListViewModel {
                               completion: ([Mission]) -> Void)
 }
 
+struct DummyMission: Mission {
+    var name: String
+    var launchYear: String
+    var rocketName: String
+}
+
 struct DummyMissionsListViewModel: MissionsListViewModel {
     func listOfSpaceXMissions(filter: Set<MissionListFilterOptions>?, sort: Set<MissionListSortOptions>?, completion: ([Mission]) -> Void) {
-        let currentDate = Date.now
         let missions = [
-            Mission(date: currentDate.addingTimeInterval(-1 * 1000 * 60 * 60 * 24)),
-            Mission(date: currentDate)
+            DummyMission(
+                name: "RazakSat",
+                launchYear: "2009",
+                rocketName: "Voyager"
+            ),
+            DummyMission(
+                name: "RazakSat II",
+                launchYear: "2008",
+                rocketName: "Voyager II"
+            )
         ]
-        completion(missions)    }
+        completion(missions)
+    }
 }
