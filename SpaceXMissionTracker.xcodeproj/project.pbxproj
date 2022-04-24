@@ -21,7 +21,8 @@
 		A7A7E74B2814BE5300F0E2A3 /* MissionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */; };
 		A7A7E74E2814C09500F0E2A3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74D2814C09500F0E2A3 /* Response.swift */; };
 		A7A7E7502815EED300F0E2A3 /* MissionResponseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74F2815EED300F0E2A3 /* MissionResponseFactory.swift */; };
-		A7A7E7532815F10100F0E2A3 /* MissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7522815F10100F0E2A3 /* MissionResponse.swift */; };
+		A7A7E7532815F10100F0E2A3 /* MissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7522815F10100F0E2A3 /* MissionsResponse.swift */; };
+		A7A7E7562815F78100F0E2A3 /* ExternalGraphQLMissionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,8 @@
 		A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListService.swift; sourceTree = "<group>"; };
 		A7A7E74D2814C09500F0E2A3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		A7A7E74F2815EED300F0E2A3 /* MissionResponseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionResponseFactory.swift; sourceTree = "<group>"; };
-		A7A7E7522815F10100F0E2A3 /* MissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionResponse.swift; sourceTree = "<group>"; };
+		A7A7E7522815F10100F0E2A3 /* MissionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsResponse.swift; sourceTree = "<group>"; };
+		A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalGraphQLMissionListService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 		A7A7E7492814BE3C00F0E2A3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A7A7E7542815F6F500F0E2A3 /* External */,
 				A7A7E7512815F0F200F0E2A3 /* Entities */,
 				A7A7E74A2814BE5300F0E2A3 /* MissionListService.swift */,
 				A7A7E74F2815EED300F0E2A3 /* MissionResponseFactory.swift */,
@@ -228,9 +231,17 @@
 		A7A7E7512815F0F200F0E2A3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				A7A7E7522815F10100F0E2A3 /* MissionResponse.swift */,
+				A7A7E7522815F10100F0E2A3 /* MissionsResponse.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		A7A7E7542815F6F500F0E2A3 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */,
+			);
+			path = External;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,9 +377,10 @@
 				A7A7E7502815EED300F0E2A3 /* MissionResponseFactory.swift in Sources */,
 				A7A7E74E2814C09500F0E2A3 /* Response.swift in Sources */,
 				A7A7E7482814B9CB00F0E2A3 /* MissionFactory.swift in Sources */,
+				A7A7E7562815F78100F0E2A3 /* ExternalGraphQLMissionListService.swift in Sources */,
 				A7A7E7452814B88B00F0E2A3 /* MissionsListViewModel.swift in Sources */,
 				A7A7E74B2814BE5300F0E2A3 /* MissionListService.swift in Sources */,
-				A7A7E7532815F10100F0E2A3 /* MissionResponse.swift in Sources */,
+				A7A7E7532815F10100F0E2A3 /* MissionsResponse.swift in Sources */,
 				A7A7E7412814B27E00F0E2A3 /* RouteFactory.swift in Sources */,
 				A7A7E73D2814B1EB00F0E2A3 /* RootNavigationViewController.swift in Sources */,
 				A7A7E7052814AE1100F0E2A3 /* AppDelegate.swift in Sources */,

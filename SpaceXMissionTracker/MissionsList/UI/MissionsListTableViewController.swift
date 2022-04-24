@@ -24,7 +24,7 @@ class MissionsListTableViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         title = "List of SpaceX Missions"
         
-        viewModel?.listOfSpaceXMissions(filter: nil, sort: nil) {[weak self] in
+        viewModel?.listOfSpaceXMissions(filters: nil, sort: .byYear) {[weak self] in
             self?.missions = $0
         }
 

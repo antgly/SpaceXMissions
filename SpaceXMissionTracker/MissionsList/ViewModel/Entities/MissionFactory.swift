@@ -1,11 +1,17 @@
 import Foundation
 
-protocol Mission {
-    var launchYear: String { get }
-    var rocketName: String { get }
-    var name: String { get }
+struct Mission {
+    var name: String
+    var launchYear: String
+    var rocketName: String
 }
 
 protocol MissionFactory {
-    static func createMission() -> Mission
+    static func createMissionsFromMissionsResponse(_ response: MissionsResponse) -> [Mission]
+}
+
+class MissionFactoryImpl: MissionFactory {
+    static func createMissionsFromMissionsResponse(_ response: MissionsResponse) -> [Mission] {
+        return []
+    }
 }

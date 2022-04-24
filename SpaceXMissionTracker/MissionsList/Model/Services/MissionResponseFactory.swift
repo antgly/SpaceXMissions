@@ -1,3 +1,3 @@
 protocol MissionResponseFactoryProtocol {
-    func createMissionResponse() -> Response<MissionResponse>
+    func createMissionsResponse() -> Response<MissionsResponse>
 }

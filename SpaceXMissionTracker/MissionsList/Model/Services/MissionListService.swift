@@ -1,12 +1,12 @@
 import Foundation
-enum MissionListServiceFilterOptions {
-    case year
+enum MissionListServiceFilterOptions: Hashable {
+    case year(String)
 }
 
 enum MissionListServiceSortOptions {
-    case alphabetically
+    case byYear
 }
 
 protocol MissionListService {
-    func fetchMissions(filter: Set<MissionListServiceFilterOptions>?, sort: MissionListServiceSortOptions, limit: UInt, completion: () -> Response<[MissionResponse.Mission]>)
+    func fetchMissions(filter: Set<MissionListServiceFilterOptions>?, sort: MissionListServiceSortOptions, limit: UInt, completion: (Response<MissionsResponse>) -> Void)
 }
