@@ -1,0 +1,10 @@
+query FetchMissions($find: LaunchFind, $sort: String, $limit: Int) {
+  launchesPast(find: $find, sort: $sort, limit: $limit) {
+    rocket {
+      rocket_name
+    }
+    mission_name
+    launch_year
+  }
+}
+

@@ -12,13 +12,13 @@ enum MissionListSortOptions {
 protocol MissionsListViewModel {
     func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>?,
                               sort: MissionListSortOptions,
-                              completion: ([Mission]) -> Void)
+                              completion: @escaping ([Mission]) -> Void)
 }
 
 class MissionsListViewModelImpl: MissionsListViewModel {
     private let missionListService: MissionListService
     private let missionFactory: MissionFactory
-
+    
     init(missionListService: MissionListService = ExternalGraphQLMissionListService(),
          missionFactory: MissionFactory = MissionFactoryImpl()
     ) {
@@ -33,30 +33,38 @@ class MissionsListViewModelImpl: MissionsListViewModel {
         }
     }
     
-    private func mapMissionListFilterOptionToMissionListServiceFilterOption(_ missionListFilterOption: MissionListFilterOptions) -> MissionListServiceFilterOptions {
+    private func mapMissionListFilterOptionToMissionListServiceFilterOption(
+        _ missionListFilterOption: MissionListFilterOptions
+    ) -> MissionListServiceFilterOptions {
         switch missionListFilterOption {
         case .year(let year):
             return .year(year)
         }
     }
-    func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>? = nil, sort: MissionListSortOptions = .byYear, completion: ([Mission]) -> Void) {
-        let sortOption = mapMissionListSortOptionToMissionListServiceSortOption(sort)
-        let serviceFiltersSet: Set<MissionListServiceFilterOptions>? = Set(filters?.compactMap(mapMissionListFilterOptionToMissionListServiceFilterOption(_:)) ?? [])
+
+    func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>? = nil, sort: MissionListSortOptions = .byYear, completion: @escaping ([Mission]) -> Void) {
         
-        missionListService.fetchMissions(filter: serviceFiltersSet, sort: sortOption, limit: 10){ response in
+        DispatchQueue(label: "FetchSpaceXMissionDataQueue", qos: .userInitiated).async {
+            let sortOption = self.mapMissionListSortOptionToMissionListServiceSortOption(sort)
+            let serviceFiltersSet: Set<MissionListServiceFilterOptions>? = Set(filters?.compactMap(self.mapMissionListFilterOptionToMissionListServiceFilterOption(_:)) ?? [])
             
-            switch response {
-                
-            case .Data(let missions):
-                completion(type(of: missionFactory).createMissionsFromMissionsResponse(missions))
-            case .Error(let error):
-                os_log("Error: %@", log: .default, type: .error, String(describing: error))
-                completion([])
-            }
-        }
+            self.missionListService.fetchMissions(filter: serviceFiltersSet, sort: sortOption, limit: 10){ [weak self] response in
+                if let self = self {
+                    switch response {
+                    case .Data(let missions):
+                        let missionsToReturn = type(of: self.missionFactory).createMissionsFromMissionsResponse(missions)
+                        DispatchQueue.main.async {
+                            completion(missionsToReturn)
+                        }
+                    case .Error(let error):
+                        os_log("Error: %@", log: .default, type: .error, String(describing: error))
+                        DispatchQueue.main.async {
+                            completion([])
+                        }
+                    }
+                }
+            }        }
     }
-    
-    
 }
 
 struct DummyMissionsListViewModel: MissionsListViewModel {

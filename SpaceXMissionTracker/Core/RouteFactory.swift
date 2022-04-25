@@ -1,6 +1,6 @@
 import UIKit
 class RouteFactory {
-    static func createRootViewController(child: UIViewController = createMissionsListViewController(dummyData: true)) -> UIViewController {
+    static func createRootViewController(child: UIViewController = createMissionsListViewController(dummyData: false)) -> UIViewController {
         RootNavigationViewController(rootViewController: child)
     }
     
@@ -8,6 +8,8 @@ class RouteFactory {
         let viewController = MissionsListTableViewController()
         if dummyData {
             viewController.viewModel = DummyMissionsListViewModel()
+        } else {
+            viewController.viewModel = MissionsListViewModelImpl()
         }
         return viewController
     }

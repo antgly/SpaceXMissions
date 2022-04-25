@@ -25,6 +25,8 @@
 		A7A7E7502815EED300F0E2A3 /* MissionResponseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E74F2815EED300F0E2A3 /* MissionResponseFactory.swift */; };
 		A7A7E7532815F10100F0E2A3 /* MissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7522815F10100F0E2A3 /* MissionsResponse.swift */; };
 		A7A7E7562815F78100F0E2A3 /* ExternalGraphQLMissionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */; };
+		A7A7E7592816346500F0E2A3 /* FetchMissions.graphql in Resources */ = {isa = PBXBuildFile; fileRef = A7A7E7582816346500F0E2A3 /* FetchMissions.graphql */; };
+		A7A7E75B281634AA00F0E2A3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A7E75A281634AA00F0E2A3 /* API.swift */; };
 		F7873F3BCE78AF7A6824266F /* Pods_SpaceXMissionTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 128B536BD1307536372F4B18 /* Pods_SpaceXMissionTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		A7A7E74F2815EED300F0E2A3 /* MissionResponseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionResponseFactory.swift; sourceTree = "<group>"; };
 		A7A7E7522815F10100F0E2A3 /* MissionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsResponse.swift; sourceTree = "<group>"; };
 		A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalGraphQLMissionListService.swift; sourceTree = "<group>"; };
+		A7A7E7582816346500F0E2A3 /* FetchMissions.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchMissions.graphql; sourceTree = "<group>"; };
+		A7A7E75A281634AA00F0E2A3 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = SpaceXMissionTracker/API.swift; sourceTree = SOURCE_ROOT; };
 		DB8E8AD8C54E6F1088F8F57D /* Pods_SpaceXMissionTracker_SpaceXMissionTrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceXMissionTracker_SpaceXMissionTrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC28EE0CE712837249699E48 /* Pods-SpaceXMissionTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXMissionTracker.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXMissionTracker/Pods-SpaceXMissionTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F9D0A6040AF24159FC025C63 /* Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests/Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -266,7 +270,9 @@
 		A7A7E7542815F6F500F0E2A3 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A7A7E75A281634AA00F0E2A3 /* API.swift */,
 				A7A7E7552815F78000F0E2A3 /* ExternalGraphQLMissionListService.swift */,
+				A7A7E7582816346500F0E2A3 /* FetchMissions.graphql */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -281,7 +287,6 @@
 				8CC05697F2E971B2852A5D74 /* Pods-SpaceXMissionTrackerTests.debug.xcconfig */,
 				694AF597A99BA83958DCDDC0 /* Pods-SpaceXMissionTrackerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -293,6 +298,7 @@
 			buildConfigurationList = A7A7E72B2814AE1400F0E2A3 /* Build configuration list for PBXNativeTarget "SpaceXMissionTracker" */;
 			buildPhases = (
 				F934F9F48D989855A00F1429 /* [CP] Check Pods Manifest.lock */,
+				A7A7E7572816337F00F0E2A3 /* Generate Apollo GraphQL code from schema */,
 				A7A7E6FD2814AE1100F0E2A3 /* Sources */,
 				A7A7E6FE2814AE1100F0E2A3 /* Frameworks */,
 				A7A7E6FF2814AE1100F0E2A3 /* Resources */,
@@ -394,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A7E7592816346500F0E2A3 /* FetchMissions.graphql in Resources */,
 				A7A7E7112814AE1400F0E2A3 /* LaunchScreen.storyboard in Resources */,
 				A7A7E70E2814AE1400F0E2A3 /* Assets.xcassets in Resources */,
 			);
@@ -494,6 +501,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests/Pods-SpaceXMissionTracker-SpaceXMissionTrackerUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A7A7E7572816337F00F0E2A3 /* Generate Apollo GraphQL code from schema */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL code from schema";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+		};
 		F934F9F48D989855A00F1429 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -533,6 +558,7 @@
 				A7A7E7412814B27E00F0E2A3 /* RouteFactory.swift in Sources */,
 				A7A7E73D2814B1EB00F0E2A3 /* RootNavigationViewController.swift in Sources */,
 				A7A7E7052814AE1100F0E2A3 /* AppDelegate.swift in Sources */,
+				A7A7E75B281634AA00F0E2A3 /* API.swift in Sources */,
 				A7A7E7432814B47000F0E2A3 /* MissionsListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

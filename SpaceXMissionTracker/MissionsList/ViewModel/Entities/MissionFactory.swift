@@ -12,6 +12,8 @@ protocol MissionFactory {
 
 class MissionFactoryImpl: MissionFactory {
     static func createMissionsFromMissionsResponse(_ response: MissionsResponse) -> [Mission] {
-        return []
+        response.missions.map {
+            return Mission(name: $0.missionName, launchYear: $0.year, rocketName: $0.rocketName)
+        }
     }
 }
