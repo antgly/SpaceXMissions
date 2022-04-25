@@ -2,15 +2,18 @@ import Foundation
 import os
 
 enum MissionListFilterOptions: Hashable {
+    case `default`
     case year(String)
 }
 
 enum MissionListSortOptions {
+    case `default`
+    case byRocketName
     case byYear
 }
 
 protocol MissionsListViewModel {
-    func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>?,
+    func listOfSpaceXMissions(filter: MissionListFilterOptions,
                               sort: MissionListSortOptions,
                               completion: @escaping ([Mission]) -> Void)
 }
@@ -29,7 +32,11 @@ class MissionsListViewModelImpl: MissionsListViewModel {
     private func mapMissionListSortOptionToMissionListServiceSortOption(_ missionListSortOption: MissionListSortOptions) -> MissionListServiceSortOptions {
         switch missionListSortOption {
         case .byYear:
-            return .byYear
+            return .year
+        case .byRocketName:
+            return .rocketName
+        case .default:
+            return .default
         }
     }
     
@@ -37,18 +44,27 @@ class MissionsListViewModelImpl: MissionsListViewModel {
         _ missionListFilterOption: MissionListFilterOptions
     ) -> MissionListServiceFilterOptions {
         switch missionListFilterOption {
+        case .default:
+            return .year(String(Calendar.autoupdatingCurrent.dateComponents([.year], from: Date.now).year!))
         case .year(let year):
             return .year(year)
         }
     }
 
-    func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>? = nil, sort: MissionListSortOptions = .byYear, completion: @escaping ([Mission]) -> Void) {
+    func listOfSpaceXMissions(filter: MissionListFilterOptions = .default, sort: MissionListSortOptions = .default, completion: @escaping ([Mission]) -> Void) {
         
         DispatchQueue(label: "FetchSpaceXMissionDataQueue", qos: .userInitiated).async {
             let sortOption = self.mapMissionListSortOptionToMissionListServiceSortOption(sort)
-            let serviceFiltersSet: Set<MissionListServiceFilterOptions>? = Set(filters?.compactMap(self.mapMissionListFilterOptionToMissionListServiceFilterOption(_:)) ?? [])
+            let serviceFilter: MissionListServiceFilterOptions = {
+                switch filter {
+                case .default:
+                    return .default
+                case .year(let string):
+                    return .year(string)
+                }
+            }()
             
-            self.missionListService.fetchMissions(filter: serviceFiltersSet, sort: sortOption, limit: 10){ [weak self] response in
+            self.missionListService.fetchMissions(filter: serviceFilter, sort: sortOption, limit: 10){ [weak self] response in
                 if let self = self {
                     switch response {
                     case .Data(let missions):
@@ -68,7 +84,7 @@ class MissionsListViewModelImpl: MissionsListViewModel {
 }
 
 struct DummyMissionsListViewModel: MissionsListViewModel {
-    func listOfSpaceXMissions(filters: Set<MissionListFilterOptions>?, sort: MissionListSortOptions, completion: ([Mission]) -> Void) {
+    func listOfSpaceXMissions(filter: MissionListFilterOptions, sort: MissionListSortOptions, completion: ([Mission]) -> Void) {
         let missions = [
             Mission(
                 name: "RazakSat",

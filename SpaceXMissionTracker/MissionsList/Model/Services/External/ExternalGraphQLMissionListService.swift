@@ -2,14 +2,15 @@ import Foundation
 import Apollo
 class ExternalGraphQLMissionListService: MissionListService {
     private lazy var apolloClient = ApolloClient(url: URL(string: "https://api.spacex.land/graphql/")!)
-    func fetchMissions(filter: Set<MissionListServiceFilterOptions>? = nil, sort: MissionListServiceSortOptions = .byYear, limit: UInt = 10, completion: @escaping (Response<MissionsResponse>) -> Void) {
-        var launchYearToFilterBy: String?
-        filter?.forEach({ option in
-            switch option {
-            case .year(let year):
-                launchYearToFilterBy = year
+    func fetchMissions(filter: MissionListServiceFilterOptions = .default, sort: MissionListServiceSortOptions = .default, limit: UInt = 10, completion: @escaping (Response<MissionsResponse>) -> Void) {
+        let launchYearToFilterBy: String? = {
+            switch filter {
+            case .default:
+                return nil
+            case .year(let string):
+                return string
             }
-        })
+        }()
         let launchFind = LaunchFind(launchYear: launchYearToFilterBy)
         let query = FetchMissionsQuery(find: launchFind, sort: sort.gqlValue(), limit: Int(limit))
         apolloClient.fetch(query: query) { result in
